@@ -1,0 +1,409 @@
+\documentclass[
+paper=5.5in:8.5in,
+BCOR=7mm,
+twoside,
+DIV=calc,
+12pt,
+usegeometry,
+chapterprefix,
+headings=big]{scrbook} % Document font size and paper size
+
+\usepackage{graphicx}
+\usepackage{verse}
+\usepackage{xcolor}
+\usepackage{fontspec}
+\usepackage[T1]{fontenc} % International character encodings
+\usepackage{makeidx}
+\usepackage{lettrine}
+\usepackage{scrlayer-scrpage}
+\usepackage{pifont}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{csquotes}
+\usepackage[export]{adjustbox}
+\usepackage{polyglossia}
+\usepackage{afterpage}
+\usepackage{microtype}
+\usepackage{tocbasic}
+\usepackage[pass]{geometry}
+\usepackage{setspace}
+\usepackage{subfiles}
+\usepackage{rotating}
+\usepackage[all]{nowidow}
+\usepackage{setspaceenhanced}
+\usepackage{ebgaramond} 
+
+\setmainfont{EB Garamond}
+\setdefaultlanguage[variant=uk]{english}
+\newcommand{\HUGE}{\fontsize{50}{60}\selectfont}
+\newcommand{\moderatelyhuge}{\fontsize{50}{60}\selectfont}
+\newcommand{\reasonablyhuge}{\fontsize{30}{40}\selectfont}
+\newfontfamily\chapterfont{IMFeENsc28P.ttf}
+\newfontfamily\chapterfontlower{IMFeENsc28P.ttf}
+
+
+\setkomafont{chapter}{\chapterfont\Huge\bfseries}
+\addtokomafont{disposition}{\normalfont}
+\setkomafont{part}{\chapterfont\HUGE\bfseries}
+\addtokomafont{partnumber}{\chapterfont\moderatelyhuge}
+\renewcommand*{\partformat}{\partname~\thepart} %renew so it doesn't have the trailing period
+\renewcommand*{\chapterformat}{\chaptername~\thechapter}
+\newcommand*\hideentrynumber[1]{}
+\makeatletter
+\NewDocumentCommand\ArtPart{som}{%
+  \cleardoubleevenpage
+  \IfBooleanTF{#1}{% star version: no TOC entry or page header
+  }{%
+    \refstepcounter{part}%
+    \IfValueTF{#2}{% optional argument: Use for TOC entry and page header
+      \addparttocentry{\thepart.}{#2}%
+      \partmark{#2}%
+    }{}%
+  }%
+  \noindent\includegraphics[width=\textwidth]{#3}%
+  \par\nobreak
+  \@afterindentfalse% don't indent first paragraph after the heading
+  \@afterheading% don't allow page break here etc.
+  \thispagestyle{plain}
+}
+\NewDocumentCommand\ArtChapter{som}{%
+  \cleardoubleoddpage
+  \IfBooleanTF{#1}{% star version: no TOC entry or page header
+  }{%
+    \refstepcounter{chapter}%
+    \IfValueTF{#2}{% optional argument: Use for TOC entry and page header
+      \addchaptertocentry{\thechapter}{#2}%
+      \chaptermark{#2}%
+    }{}%
+  }%
+  \noindent\includegraphics[width=\textwidth]{#3}%
+  \par\nobreak
+  \@afterindentfalse% don't indent first paragraph after the heading
+  \@afterheading% don't allow page break here etc.
+  \thispagestyle{plain}
+}
+\newcommand{\unchapter}[1]{%
+  \begingroup
+  \let\@makechapterhead\@gobble % make \@makechapterhead do nothing
+  \chapter{#1}
+  \endgroup
+}
+\makeatother
+
+\BeforeTOCHead[toc]{%
+  \KOMAoptions{parskip=false}% no parskip in ToC
+  \RedeclareSectionCommand[afterskip=1sp minus 1sp]{chapter}% no skip after ToC title
+
+}
+\BeforeTOCHead[tocline]{%
+  \KOMAoptions{parskip=false}% no parskip in ToC
+  \RedeclareSectionCommand[afterskip=0pt]{figure}% no skip after ToC title
+  \RedeclareSectionCommand[tocbeforeskip=1sp minus 1sp]{figure} %scootch entries together
+}
+
+\DeclareTOCStyleEntry[beforeskip=.1cm,entryformat=\chapterfont,dynnumwidth=true,linefill=\TOCLineLeaderFill]{chapter}{chapter}
+
+\DeclareTOCStyleEntry[beforeskip=.3cm,dynnumwidth=true,entryformat=\Large\chapterfont\bfseries]{part}{part}
+\DeclareTOCStyleEntry[beforeskip=.1cm,numwidth=-20pt,entrynumberformat=\hideentrynumber]{tocline}{figure}
+\DeclareTOCStyleEntry[beforeskip=.1cm]{tocline}{part}
+\DeclareTOCStyleEntry[beforeskip=.1cm]{default}{subsection}
+
+
+
+\headsep=10pt
+\headheight=45pt
+\footskip=30pt
+
+
+
+%\defaultfontfeatures{Mapping=tex-text}
+\defaultfontfeatures{Ligatures=TeX}
+
+
+
+\automark{chapter}
+\lehead{Treasure Island}
+\rohead{Chapter \thechapter: \leftmark}
+\flushbottom
+
+\setlist[itemize]{noitemsep} 
+
+\captionsetup[figure]{font=sc,labelformat=empty}
+
+\graphicspath{ {./images/} }
+
+
+\newcommand{\shortyoho}{
+\settowidth{\versewidth}{Fifteen men on the dead man’s chest---}
+\begin{verse}[\versewidth]
+\begin{altverse}
+Fifteen men on the dead man’s chest---\\
+Yo-ho-ho, and a bottle of rum!
+\end{altverse}
+\end{verse}
+}
+
+\newcommand{\longyoho}{
+\settowidth{\versewidth}{Drink and the devil had done for the rest---}
+\begin{verse}[\versewidth]
+\begin{altverse}
+Fifteen men on the dead man’s chest---\\
+Yo-ho-ho, and a bottle of rum!\\
+Drink and the devil had done for the rest---\\
+Yo-ho-ho, and a bottle of rum!
+\end{altverse}
+\end{verse}
+}
+
+\hyphenation{}
+
+
+\begin{document}
+
+\renewcommand*{\chaptermarkformat}{}
+\renewcommand*{\chapterheadendvskip}{\vspace{10pt}}
+\renewcommand*{\chapterheadstartvskip}{\vspace{0pt}}
+
+\frontmatter
+\pagestyle{empty}
+
+  \recalctypearea
+ \newgeometry{left=15mm,right=15mm,top=15mm, bottom=20mm}
+ \vfill
+ \begin{figure}[p!]
+\centering
+\includegraphics[width=\linewidth]{titlepage}
+%\caption[Title Page]{}
+\end{figure}
+\vfill
+\thispagestyle{empty}
+
+\clearpage
+\KOMAoptions{headings=openleft}
+ \vfill
+ \begin{figure}[p!]
+\centering
+\includegraphics[width=\linewidth]{frontispiece}
+\caption[\textbf{Frontispiece: Long John Silver}]{Long John Silver}
+\end{figure}
+\vfill
+\thispagestyle{empty}
+
+\vfill
+ \begin{figure}[p!]
+\centering
+\includegraphics[width=\linewidth]{timapcolor}
+\caption[Map]{}
+\end{figure}
+\vfill
+\thispagestyle{empty}
+\clearpage
+
+\pagestyle{plain}
+
+\renewcommand*\raggedchapter{\centering}
+%\KOMAoptions{headings=openleft}
+
+  \recalctypearea
+\restoregeometry
+
+%\footskip=20pt
+\renewcommand{\contentsname}{\includegraphics[width=\linewidth]{contents}\vspace{-1cm}}
+\tableofcontents
+%\clearpage
+
+
+
+
+\renewcommand{\listfigurename}{\includegraphics[width=\linewidth]{listofillustrations}\vspace{-0.5cm}}
+\listoffigures
+
+%\clearpage
+
+
+
+\footskip=30pt
+
+\KOMAoptions{headings=openany}
+\chapter*{Dedication}
+~\\
+~\\
+\lettrine[lines=4,image=true]{chap9initT}{o} S.L.O., an American gentleman in accordance with whose classic taste the following narrative has been designed, it is now, in return for numerous delightful hours, and with the kindest wishes, dedicated by his affectionate friend,
+\begin{flushright}
+\textsc{the author.}
+\end{flushright}
+\clearpage
+
+
+\chapter*{To The Hesitating Purchaser}
+\vfill
+\settowidth{\versewidth}{Can please, as me they pleased of old,}
+\begin{verse}[\versewidth]
+\begin{altverse}
+If sailor tales to sailor tunes,\\
+Storm and adventure, heat and cold,\\
+If schooners, islands, and maroons,\\
+And buccaneers, and buried gold,\\
+And all the old romance, retold\\
+Exactly in the ancient way,\\
+Can please, as me they pleased of old,\\
+The wiser youngsters of today:\\!
+---So be it, and fall on! If not,\\
+If studious youth no longer crave,\\
+His ancient appetites forgot,\\
+Kingston, or Ballantyne the brave,\\
+Or Cooper of the wood and wave:\\
+So be it, also! And may I\\
+And all my pirates share the grave\\
+Where these and their creations lie!\\
+\end{altverse}
+\end{verse}
+\vfill
+
+
+
+
+ 
+% \KOMAoptions{headings=openleft}
+% \newpage
+%
+%\begin{figure}[t!]
+%\centering
+%\includegraphics[width=\linewidth]{contents}
+%\end{figure}
+%\tableofcontents
+%
+%\clearpage
+
+
+{
+\renewcommand{\cleardoublepage}{\newpage}
+\mainmatter
+}
+\pagestyle{headings}
+\renewcommand*{\chapterpagestyle}{plain}
+%\pagestyle{headings}
+%\KOMAoptions{headings=openleft}
+%\addcontentsline{toc}{part}{Part \thepart: The Old Buccaneer}
+%%\stepcounter{\thepart}
+%\part{The Old Buccaneer}
+%\begin{figure}[p!]
+%\centering
+%\includegraphics[width=\linewidth]{part1head}
+%\end{figure}
+%
+%\thispagestyle{empty}
+\ArtPart[The Old Buccaneer]{part1head}
+
+%\stepcounter{\part}
+%\addcontentsline{toc}{part}{Part \thepart: The Old Buccaneer}
+
+
+\KOMAoptions{headings=openright}
+\include{chapters/01.tex}
+\include{chapters/02.tex}
+\include{chapters/03.tex}
+\include{chapters/04.tex}
+\include{chapters/05.tex}
+\include{chapters/06.tex}
+
+\KOMAoptions{headings=openleft}
+
+\ArtPart[The Sea-Cook]{part2head}
+%\begin{figure}[p!]
+%\centering
+%\includegraphics[width=\linewidth]{part2head}
+%\end{figure}
+%\thispagestyle{empty}
+
+\KOMAoptions{headings=openright}
+\include{chapters/07.tex}
+\include{chapters/08.tex}
+\include{chapters/09.tex}
+\include{chapters/10.tex}
+\include{chapters/11.tex}
+\include{chapters/12.tex}
+
+
+\KOMAoptions{headings=openleft}
+
+\ArtPart[My Shore Adventure]{part3head}
+%\begin{figure}[p!]
+%\centering
+%\includegraphics[width=\linewidth]{part3head}
+%\end{figure}
+%\thispagestyle{empty}
+
+\KOMAoptions{headings=openright}
+\include{chapters/13.tex}
+\include{chapters/14.tex}
+\include{chapters/15.tex}
+
+
+\KOMAoptions{headings=openleft}
+\ArtPart[The Stockade]{part4headimproved}
+%\part{The Stockade}
+%\begin{figure}[p!]
+%\centering
+%\includegraphics[width=\linewidth]{part4head}
+%\end{figure}
+%\thispagestyle{empty}
+\KOMAoptions{headings=openright}
+\include{chapters/16.tex}
+\include{chapters/17.tex}
+\include{chapters/18.tex}
+\include{chapters/19.tex}
+\include{chapters/20.tex}
+\include{chapters/21.tex}
+
+
+\KOMAoptions{headings=openleft}
+%\part{My Sea Adventure}
+\ArtPart[My Sea Adventure]{part5head}
+%\begin{figure}[p!]
+%\centering
+%\includegraphics[width=\linewidth]{part5head}
+%\end{figure}
+%\thispagestyle{empty}
+\KOMAoptions{headings=openright}
+\include{chapters/22.tex}
+\include{chapters/23.tex}
+\include{chapters/24.tex}
+\include{chapters/25.tex}
+\include{chapters/26.tex}
+\include{chapters/27.tex}
+
+\KOMAoptions{headings=openleft}
+\ArtPart[Captain Silver]{part6head}
+%\part{Captain Silver}
+%\begin{figure}[p!]
+%\centering
+%\includegraphics[width=\linewidth]{part6head}
+%\end{figure}
+%\thispagestyle{empty}
+
+\KOMAoptions{headings=openright}
+\include{chapters/28.tex}
+\include{chapters/29.tex}
+\include{chapters/30.tex}
+\include{chapters/31.tex}
+\include{chapters/32.tex}
+\include{chapters/33.tex}
+\include{chapters/34.tex}
+
+
+
+\clearpage
+\KOMAoptions{headings=openleft}
+\begin{figure}[t!]
+\centering
+\includegraphics[width=\linewidth]{colophon}
+\end{figure}
+\centering
+EB Garamond is Georg Mayr-Duffner's free and open source implementation of Claude Garamond’s famous humanist typefaces from the mid-16th century. This digital version reproduces the original design by Claude Garamont closely: the source for the letterforms is a scan of a specimen known as the \enquote{Berner specimen,} which was composed in 1592 by Conrad Berner, the son-in-law of Christian Egenolff and his successor at the Egenolff print office.  \\github.com/georgd/EB-Garamond
+\vfill
+Chapter and part titles are set in IM Fell. Dr John Fell, Bishop of Oxford, purchased the original set of types from Holland ca. 1670 for use by the University of Oxford. The Fell Types are digitally reproduced by Igino Marini. \\www.iginomarini.com
+\vfill
+Typeset in \LaTeX{}.
+\thispagestyle{empty}
+\end{document}
