@@ -1,5 +1,4 @@
 # treasureislandforbinders
-Treasure Island for the DIY bookbinder
 _Treasure Island_ for the DIY bookbinder, featuring 4 color and over 100 black and white drawings (including custom dropcaps) created by Louis Rhead for the 1915 edition. Available in US letter and A4 format. Text and illustrations are in the public domain in the United States. Fonts used, to the best of my knowledge, are free to use for any purpose including commercial. Whatever original work of mine this effort represents, I place into the public domain. In other words, to the best of my knowledge you _may_ make and sell copies of this. I am not a lawyer and you are responsible for compliance with your government's copyright law(s).
 
 CW: Ableism, colorism. Use of slur "Negress" to refer to a Black woman, "half-breed" to refer to people with Indigenous ancestry. Description of end-stage alcoholism. Description of 18th-century medical practices including bloodletting. Casual violence and death of minor characters. Abandonment ("marooning") of characters.
@@ -52,5 +51,5 @@ TeX originals are in the source folder.
 
 Fonts used are:
 
-EB Garamond: https://www.1001freefonts.com/eb-garamond.font
-IM Fell English Small Caps: https://www.1001freefonts.com/im-fell-english-sc.font
+* EB Garamond: https://www.1001freefonts.com/eb-garamond.font
+* IM Fell English Small Caps: https://www.1001freefonts.com/im-fell-english-sc.font
