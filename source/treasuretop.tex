@@ -1,9 +1,10 @@
 \documentclass[
-paper=5.5in:8.5in,
+%paper=5.5in:8.5in,
+paper=a5,
 BCOR=7mm,
 twoside,
 DIV=calc,
-12pt,
+11pt,
 usegeometry,
 chapterprefix,
 headings=big]{scrbook} % Document font size and paper size
@@ -32,6 +33,15 @@ headings=big]{scrbook} % Document font size and paper size
 \usepackage[all]{nowidow}
 \usepackage{setspaceenhanced}
 \usepackage{ebgaramond} 
+\usepackage{floatpag}
+
+\MakeAutoQuote{»}{«}
+\catcode`\—=13
+\protected\def—{\allowbreak\textemdash\allowbreak}
+\newcommand\longdash{\mbox{---\,}\ignorespaces{}}
+
+\floatpagestyle{empty}
+\rotfloatpagestyle{empty}
 
 \setmainfont{EB Garamond}
 \setdefaultlanguage[variant=uk]{english}
@@ -90,21 +100,43 @@ headings=big]{scrbook} % Document font size and paper size
 }
 \makeatother
 
-\BeforeTOCHead[toc]{%
-  \KOMAoptions{parskip=false}% no parskip in ToC
-  \RedeclareSectionCommand[afterskip=1sp minus 1sp]{chapter}% no skip after ToC title
+\newcount\zzc
+\makeatletter
+\def\zz{%
+\ifnum\prevgraf<\c@L@lines
+\zzc\z@
+\loop
+\ifnum\zzc<\prevgraf
+\advance\zzc\@ne
+\afterassignment\zzda\count@\L@parshape\relax
+\repeat
+\parshape\L@parshape
+\fi}
+\def\zzda{\afterassignment\zzdb\dimen@}
+\def\zzdb{\afterassignment\zzdef\dimen@}
+\def\zzdef#1\relax{\edef\L@parshape{\the\numexpr\count@-1\relax\space #1}}
+\makeatother
 
-}
+%\BeforeTOCHead[toc]{%
+%  \KOMAoptions{parskip=false}% no parskip in ToC
+%  \RedeclareSectionCommand[afterskip=1cm]{chapter}
+%}
 \BeforeTOCHead[tocline]{%
   \KOMAoptions{parskip=false}% no parskip in ToC
-  \RedeclareSectionCommand[afterskip=0pt]{figure}% no skip after ToC title
+%  \RedeclareSectionCommand[afterskip=0pt]{figure}% no skip after ToC title
   \RedeclareSectionCommand[tocbeforeskip=1sp minus 1sp]{figure} %scootch entries together
 }
 
-\DeclareTOCStyleEntry[beforeskip=.1cm,entryformat=\chapterfont,dynnumwidth=true,linefill=\TOCLineLeaderFill]{chapter}{chapter}
+\DeclareTOCStyleEntry[beforeskip=.1cm,dynnumwidth=true,linefill=\TOCLineLeaderFill]{chapter}{chapter}
 
-\DeclareTOCStyleEntry[beforeskip=.3cm,dynnumwidth=true,entryformat=\Large\chapterfont\bfseries]{part}{part}
+\DeclareTOCStyleEntry[beforeskip=.3cm,dynnumwidth=true,entryformat=\Large\bfseries]{part}{part}
 \DeclareTOCStyleEntry[beforeskip=.1cm,numwidth=-20pt,entrynumberformat=\hideentrynumber]{tocline}{figure}
+
+%\DeclareTOCStyleEntry[beforeskip=.1cm,entryformat=\chapterfont,dynnumwidth=true,linefill=\TOCLineLeaderFill]{chapter}{chapter}
+%
+%\DeclareTOCStyleEntry[beforeskip=.3cm,dynnumwidth=true,entryformat=\Large\chapterfont\bfseries]{part}{part}
+%\DeclareTOCStyleEntry[beforeskip=.1cm,numwidth=-20pt,entrynumberformat=\hideentrynumber]{tocline}{figure}
+
 \DeclareTOCStyleEntry[beforeskip=.1cm]{tocline}{part}
 \DeclareTOCStyleEntry[beforeskip=.1cm]{default}{subsection}
 
@@ -133,28 +165,6 @@ headings=big]{scrbook} % Document font size and paper size
 \graphicspath{ {./images/} }
 
 
-\newcommand{\shortyoho}{
-\settowidth{\versewidth}{Fifteen men on the dead man’s chest---}
-\begin{verse}[\versewidth]
-\begin{altverse}
-Fifteen men on the dead man’s chest---\\
-Yo-ho-ho, and a bottle of rum!
-\end{altverse}
-\end{verse}
-}
-
-\newcommand{\longyoho}{
-\settowidth{\versewidth}{Drink and the devil had done for the rest---}
-\begin{verse}[\versewidth]
-\begin{altverse}
-Fifteen men on the dead man’s chest---\\
-Yo-ho-ho, and a bottle of rum!\\
-Drink and the devil had done for the rest---\\
-Yo-ho-ho, and a bottle of rum!
-\end{altverse}
-\end{verse}
-}
-
 \hyphenation{}
 
 
@@ -173,18 +183,18 @@ Yo-ho-ho, and a bottle of rum!
  \begin{figure}[p!]
 \centering
 \includegraphics[width=\linewidth]{titlepage}
-%\caption[Title Page]{}
 \end{figure}
 \vfill
-\thispagestyle{empty}
 
 \clearpage
-\KOMAoptions{headings=openleft}
+
+\KOMAoptions{headings=openany}
+
  \vfill
  \begin{figure}[p!]
 \centering
 \includegraphics[width=\linewidth]{frontispiece}
-\caption[\textbf{Frontispiece: Long John Silver}]{Long John Silver}
+\caption[\textbf{Frontispiece}]{}
 \end{figure}
 \vfill
 \thispagestyle{empty}
@@ -208,7 +218,7 @@ Yo-ho-ho, and a bottle of rum!
 \restoregeometry
 
 %\footskip=20pt
-\renewcommand{\contentsname}{\includegraphics[width=\linewidth]{contents}\vspace{-1cm}}
+\renewcommand{\contentsname}{\includegraphics[width=\linewidth]{contents}}
 \tableofcontents
 %\clearpage
 
@@ -394,7 +404,9 @@ Where these and their creations lie!\\
 
 
 \clearpage
+
 \KOMAoptions{headings=openleft}
+\chapter*{}
 \begin{figure}[t!]
 \centering
 \includegraphics[width=\linewidth]{colophon}
