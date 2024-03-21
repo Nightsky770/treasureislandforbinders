@@ -34,6 +34,7 @@ headings=big]{scrbook} % Document font size and paper size
 \usepackage{setspaceenhanced}
 \usepackage{ebgaramond} 
 \usepackage{floatpag}
+\usepackage{pdfpages}
 
 \MakeAutoQuote{»}{«}
 \catcode`\—=13
@@ -170,15 +171,6 @@ headings=big]{scrbook} % Document font size and paper size
 
 \begin{document}
 
-\makeatletter
-\@ifclasswith{scrbook}{a5paper}
-{%
-  \def\picsize{.9\hsize}
-}{%
-  \def\picsize{\hsize}
-}
-\makeatother
-
 \renewcommand*{\chaptermarkformat}{}
 \renewcommand*{\chapterheadendvskip}{\vspace{10pt}}
 \renewcommand*{\chapterheadstartvskip}{\vspace{0pt}}
@@ -186,45 +178,54 @@ headings=big]{scrbook} % Document font size and paper size
 \frontmatter
 \pagestyle{empty}
 
- \recalctypearea
- \newgeometry{left=15mm,right=15mm,top=15mm,bottom=15mm}
- \vfill
- \begin{figure}[p!]
-\centering
-\includegraphics[width=\hsize]{titlepage}
-\end{figure}
-\vfill
+% \recalctypearea
+% \newgeometry{left=15mm,right=15mm,top=15mm,bottom=15mm}
+ 
+ \includepdf[width=\textwidth]{titlepage.png}
+  \includepdf[width=\textwidth]{frontispiece.png}
+  \includepdf[width=\textwidth]{timapcolor.png}
+ 
+%	 
+%	 \vfill
+%	 \begin{figure}[p!]
+%	\centering
+%	\includegraphics[width=\hsize]{titlepage}
+%	\end{figure}
+%	\vfill
+%	
+%	
+%	\KOMAoptions{headings=openany}
+%	
+%	
+%	\vfill
+%	 \begin{figure}[p!]
+%	\centering
+%	\includegraphics[width=\hsize]{frontispiece}
+%	\caption[\textbf{Frontispiece}]{}
+%	\end{figure}
+%	\vfill
+%	\thispagestyle{empty}
+%	
+%	
+%	
+%	~\vfill
+%	 \begin{figure}[p!]
+%	\centering
+%	\includegraphics[width=\picsize]{timapcolor}
+%	\caption[Map]{}
+%	\end{figure}
+%	~\vfill
+%	\thispagestyle{empty}
 
-\clearpage
 
-\KOMAoptions{headings=openany}
-
- \vfill
- \begin{figure}[p!]
-\centering
-\includegraphics[width=\hsize]{frontispiece}
-\caption[\textbf{Frontispiece}]{}
-\end{figure}
-\vfill
-\thispagestyle{empty}
-
-\vfill
- \begin{figure}[p!]
-\centering
-\includegraphics[width=\picsize]{timapcolor}
-\caption[Map]{}
-\end{figure}
-\vfill
-\thispagestyle{empty}
-\clearpage
 
 \pagestyle{plain}
 
 \renewcommand*\raggedchapter{\centering}
-%\KOMAoptions{headings=openleft}
+\KOMAoptions{headings=openleft}
 
-  \recalctypearea
-\restoregeometry
+%  \recalctypearea
+%\restoregeometry
 
 %\footskip=20pt
 \renewcommand{\contentsname}{\includegraphics[width=\linewidth]{contents}}
