@@ -1,6 +1,6 @@
 \documentclass[
 %paper=5.5in:8.5in,
-paper=a5,
+a5paper,
 BCOR=7mm,
 twoside,
 DIV=calc,
@@ -170,6 +170,15 @@ headings=big]{scrbook} % Document font size and paper size
 
 \begin{document}
 
+\makeatletter
+\@ifclasswith{scrbook}{a5paper}
+{%
+  \def\picsize{.9\hsize}
+}{%
+  \def\picsize{\hsize}
+}
+\makeatother
+
 \renewcommand*{\chaptermarkformat}{}
 \renewcommand*{\chapterheadendvskip}{\vspace{10pt}}
 \renewcommand*{\chapterheadstartvskip}{\vspace{0pt}}
@@ -177,12 +186,12 @@ headings=big]{scrbook} % Document font size and paper size
 \frontmatter
 \pagestyle{empty}
 
-  \recalctypearea
- \newgeometry{left=15mm,right=15mm,top=15mm, bottom=20mm}
+ \recalctypearea
+ \newgeometry{left=15mm,right=15mm,top=15mm,bottom=15mm}
  \vfill
  \begin{figure}[p!]
 \centering
-\includegraphics[width=\linewidth]{titlepage}
+\includegraphics[width=\hsize]{titlepage}
 \end{figure}
 \vfill
 
@@ -193,7 +202,7 @@ headings=big]{scrbook} % Document font size and paper size
  \vfill
  \begin{figure}[p!]
 \centering
-\includegraphics[width=\linewidth]{frontispiece}
+\includegraphics[width=\hsize]{frontispiece}
 \caption[\textbf{Frontispiece}]{}
 \end{figure}
 \vfill
@@ -202,7 +211,7 @@ headings=big]{scrbook} % Document font size and paper size
 \vfill
  \begin{figure}[p!]
 \centering
-\includegraphics[width=\linewidth]{timapcolor}
+\includegraphics[width=\picsize]{timapcolor}
 \caption[Map]{}
 \end{figure}
 \vfill
