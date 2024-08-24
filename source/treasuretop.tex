@@ -1,6 +1,6 @@
 \documentclass[
-paper=5.5in:8.5in,
-%a5paper,
+%paper=5.5in:8.5in,
+a5paper,
 BCOR=7mm,
 twoside,
 DIV=calc,
@@ -39,6 +39,7 @@ headings=big]{scrbook} % Document font size and paper size
 \MakeAutoQuote{»}{«}
 \catcode`\—=13
 \protected\def—{\allowbreak\textemdash\allowbreak}
+\protected\def—{\textemdash}
 \newcommand\longdash{\mbox{---\,}\ignorespaces{}}
 
 \floatpagestyle{empty}
@@ -166,7 +167,7 @@ headings=big]{scrbook} % Document font size and paper size
 \graphicspath{ {./images/} }
 
 
-\hyphenation{}
+\hyphenation{Bland-ly}
 
 
 \begin{document}
@@ -248,7 +249,7 @@ headings=big]{scrbook} % Document font size and paper size
 \chapter*{Dedication}
 ~\\
 ~\\
-\lettrine[lines=4,image=true]{chap9initT}{o} S.L.O., an American gentleman in accordance with whose classic taste the following narrative has been designed, it is now, in return for numerous delightful hours, and with the kindest wishes, dedicated by his affectionate friend,
+To S.L.O., an American gentleman in accordance with whose classic taste the following narrative has been designed, it is now, in return for numerous delightful hours, and with the kindest wishes, dedicated by his affectionate friend,
 \begin{flushright}
 \textsc{the author.}
 \end{flushright}
@@ -418,7 +419,7 @@ Title page, chapter titles, and part titles are set in IM Fell. Dr John Fell, Bi
 %\noindent\hfil\rule{0.5\textwidth}{.4pt}\hfil 
 \rule{0.5\textwidth}{.4pt}
 
-\textit{Treasure Island} was originally serialised as \textit{Treasure Island; or, the Mutiny of the Hispaniola} in the magazine \textit{Young Folks} between 1881 and 1882, credited to the pseudononym »Captain George North«. In 1883, Cassell and Company published it in London (UK) as a standalone work, this time credited to Robert Louis Stevenson (1850-1894) under his own name. Illustrations by Louis Rhead (1857-1926) are from the 1915 edition, published by Harper Brothers in New York City (USA).
+\textit{Treasure Island} was originally serialised as \textit{Treasure Island; or, the Mutiny of the Hispaniola} in the magazine \textit{Young Folks} between 1881 and 1882, credited to the pseudononym »Captain George North«. In 1883, Cassell and Company published it in London (UK) as a standalone work, this time credited to Robert Louis Stevenson (1850\textendash1894) under his own name. Illustrations by Louis Rhead (1857\textendash1926) are from the 1915 edition, published by Harper Brothers in New York City (USA).
 
 \rule{0.5\textwidth}{.4pt}
 
