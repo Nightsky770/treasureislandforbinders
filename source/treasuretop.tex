@@ -20,7 +20,7 @@ headings=big]{scrbook} % Document font size and paper size
 \usepackage{pifont}
 \usepackage{enumitem}
 \usepackage{caption}
-\usepackage{csquotes}
+\usepackage[maxlevel=3,autostyle]{csquotes}
 \usepackage[export]{adjustbox}
 \usepackage{polyglossia}
 \usepackage{afterpage}
@@ -30,7 +30,7 @@ headings=big]{scrbook} % Document font size and paper size
 \usepackage{setspace}
 \usepackage{subfiles}
 \usepackage{rotating}
-\usepackage[all]{nowidow}
+\usepackage[all,defaultlines=2]{nowidow}
 \usepackage{setspaceenhanced}
 \usepackage{ebgaramond} 
 \usepackage{floatpag}
@@ -38,7 +38,7 @@ headings=big]{scrbook} % Document font size and paper size
 
 \MakeAutoQuote{»}{«}
 \catcode`\—=13
-\protected\def—{\allowbreak\textemdash\allowbreak}
+%\protected\def—{\allowbreak\textemdash\allowbreak}
 \protected\def—{\textemdash}
 \newcommand\longdash{\mbox{---\,}\ignorespaces{}}
 
@@ -54,10 +54,9 @@ headings=big]{scrbook} % Document font size and paper size
 \newfontfamily\chapterfontlower{IMFeENsc28P.ttf}
 
 
-\setkomafont{chapter}{\chapterfont\Huge\bfseries}
+
 \addtokomafont{disposition}{\normalfont}
-\setkomafont{part}{\chapterfont\HUGE\bfseries}
-\addtokomafont{partnumber}{\chapterfont\moderatelyhuge}
+
 \renewcommand*{\partformat}{\partname~\thepart} %renew so it doesn't have the trailing period
 \renewcommand*{\chapterformat}{\chaptername~\thechapter}
 \newcommand*\hideentrynumber[1]{}
@@ -89,17 +88,13 @@ headings=big]{scrbook} % Document font size and paper size
     }{}%
   }%
   \noindent\includegraphics[width=\textwidth]{#3}%
-  \par\nobreak
+%  \par\nobreak
+\vspace{0pt}
   \@afterindentfalse% don't indent first paragraph after the heading
   \@afterheading% don't allow page break here etc.
   \thispagestyle{plain}
 }
-\newcommand{\unchapter}[1]{%
-  \begingroup
-  \let\@makechapterhead\@gobble % make \@makechapterhead do nothing
-  \chapter{#1}
-  \endgroup
-}
+
 \makeatother
 
 \newcount\zzc
@@ -173,7 +168,7 @@ headings=big]{scrbook} % Document font size and paper size
 \begin{document}
 
 \renewcommand*{\chaptermarkformat}{}
-\renewcommand*{\chapterheadendvskip}{\vspace{10pt}}
+\renewcommand*{\chapterheadendvskip}{\vspace{0pt}}
 \renewcommand*{\chapterheadstartvskip}{\vspace{0pt}}
 
 \frontmatter
@@ -182,9 +177,10 @@ headings=big]{scrbook} % Document font size and paper size
 % \recalctypearea
 % \newgeometry{left=15mm,right=15mm,top=15mm,bottom=15mm}
  
- \includepdf[width=\textwidth]{titlepage.png}
-  \includepdf[width=\textwidth]{frontispiece.png}
-  \includepdf[width=\textwidth]{timapcolor.png}
+ \includepdf[width=1.2\textwidth]{title.png}
+ 
+ \includepdf[addtolist={1,figure,\textbf{Frontispiece},frontispiece},width=1.2\textwidth]{frontispiece.png}
+ \includepdf[addtolist={1,figure,\textbf{Map},map},width=\textwidth]{timapcolor.png}
  
 %	 
 %	 \vfill
@@ -236,7 +232,7 @@ headings=big]{scrbook} % Document font size and paper size
 
 
 
-\renewcommand{\listfigurename}{\includegraphics[width=\linewidth]{listofillustrations}\vspace{-0.5cm}}
+\renewcommand{\listfigurename}{\includegraphics[width=\linewidth]{listofillustrations}}
 \listoffigures
 
 %\clearpage
@@ -249,10 +245,20 @@ headings=big]{scrbook} % Document font size and paper size
 \chapter*{Dedication}
 ~\\
 ~\\
-To S.L.O., an American gentleman in accordance with whose classic taste the following narrative has been designed, it is now, in return for numerous delightful hours, and with the kindest wishes, dedicated by his affectionate friend,
-\begin{flushright}
-\textsc{the author.}
+\begin{center}\setstretch{1.8}\large
+To\\
+S.L.O.,\\ 
+an American gentleman\\ 
+in accordance with whose classic taste\\ 
+the following narrative has been designed,\\ 
+it is now, in return for numerous delightful hours,\\ 
+and with the kindest wishes,\\
+dedicated\\
+ by his affectionate friend,\\
+\begin{flushright}\scshape
+the author.
 \end{flushright}
+\end{center}
 \clearpage
 
 
@@ -284,18 +290,6 @@ Where these and their creations lie!\\
 
 
 
- 
-% \KOMAoptions{headings=openleft}
-% \newpage
-%
-%\begin{figure}[t!]
-%\centering
-%\includegraphics[width=\linewidth]{contents}
-%\end{figure}
-%\tableofcontents
-%
-%\clearpage
-
 
 {
 \renewcommand{\cleardoublepage}{\newpage}
@@ -303,21 +297,8 @@ Where these and their creations lie!\\
 }
 \pagestyle{headings}
 \renewcommand*{\chapterpagestyle}{plain}
-%\pagestyle{headings}
-%\KOMAoptions{headings=openleft}
-%\addcontentsline{toc}{part}{Part \thepart: The Old Buccaneer}
-%%\stepcounter{\thepart}
-%\part{The Old Buccaneer}
-%\begin{figure}[p!]
-%\centering
-%\includegraphics[width=\linewidth]{part1head}
-%\end{figure}
-%
-%\thispagestyle{empty}
-\ArtPart[The Old Buccaneer]{part1head}
 
-%\stepcounter{\part}
-%\addcontentsline{toc}{part}{Part \thepart: The Old Buccaneer}
+\ArtPart[The Old Buccaneer]{part1head}
 
 
 \KOMAoptions{headings=openright}
@@ -353,7 +334,7 @@ Where these and their creations lie!\\
 
 
 \KOMAoptions{headings=openleft}
-\ArtPart[The Stockade]{part4headimproved}
+\ArtPart[The Stockade]{part4head}
 
 \KOMAoptions{headings=openright}
 \include{chapters/16.tex}
@@ -399,37 +380,23 @@ Where these and their creations lie!\\
 \includegraphics[width=\linewidth]{colophon}
 \end{figure}
 \centering
-\vspace{-0.8cm}
+\vspace{-0.3cm}
 EB Garamond is Georg Mayr-Duffner's free and open source implementation of Claude Garamond’s famous humanist typefaces from the mid-sixteenth century. github.com/georgd/EB-Garamond
-%\vspace{-0.5cm}
-%\begin{center}
 
-%\end{center}
-%\vspace{-0.5cm}
-%\noindent\hfil\rule{0.5\textwidth}{.4pt}\hfil 
 \rule{0.5\textwidth}{.4pt}
 
 Title page, chapter titles, and part titles are set in IM Fell. Dr John Fell, Bishop of Oxford, purchased the original set of types from Holland circa 1670, for use by the University of Oxford. The Fell Types are digitally reproduced by Igino Marini. www.iginomarini.com
 
-%\vspace{-0.5cm}
-%\begin{center}
-%
-%\end{center}
-%\vspace{-0.5cm}
-%\noindent\hfil\rule{0.5\textwidth}{.4pt}\hfil 
-\rule{0.5\textwidth}{.4pt}
-
-\textit{Treasure Island} was originally serialised as \textit{Treasure Island; or, the Mutiny of the Hispaniola} in the magazine \textit{Young Folks} between 1881 and 1882, credited to the pseudononym »Captain George North«. In 1883, Cassell and Company published it in London (UK) as a standalone work, this time credited to Robert Louis Stevenson (1850\textendash1894) under his own name. Illustrations by Louis Rhead (1857\textendash1926) are from the 1915 edition, published by Harper Brothers in New York City (USA).
 
 \rule{0.5\textwidth}{.4pt}
 
-%\vspace{-0.5cm}
-%\noindent\hfil\rule{0.5\textwidth}{.4pt}\hfil 
+\textit{Treasure Island} was originally serialised in the magazine \textit{Young Folks} between 1881 and 1882, credited to the pseudononym »Captain George North«. In 1883, Cassell and Company published it in London (UK) as a standalone work, now credited to Robert Louis Stevenson (1850\textendash1894) under his own name. Illustrations by Louis Rhead (1857\textendash1926) are from the 1915 edition, published by Harper Brothers in New York City (USA). Grateful acknowledgement is made to the Internet Archive, which in 2007 digitised a copy of this edition belonging to the New York Public Library.
+
+\rule{0.5\textwidth}{.4pt}
+
 
 This typeset is dedicated to the public domain under a Creative Commons CC0 1.0 Universal deed: creativecommons.org/publicdomain/zero/1.0/\\
 
-%\vspace{-0.5cm}
-%\noindent\hfil\rule{0.5\textwidth}{.4pt}\hfil 
 \rule{0.5\textwidth}{.4pt}
 
 Typeset in \LaTeX{}. Last revised \today.
