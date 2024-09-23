@@ -1,123 +1,19 @@
 \documentclass[
 %paper=5.5in:8.5in,
 a5paper,
-BCOR=7mm,
-twoside,
-DIV=calc,
-11pt,
-usegeometry,
-chapterprefix,
-headings=big]{scrbook} % Document font size and paper size
-
-\usepackage{graphicx}
+]{scrbook} % Document font size and paper size
+\usepackage{bindery}
+\usepackage{dropcaps}
+\usepackage{artheadings}
+\usepackage{illustrations}
 \usepackage{verse}
-\usepackage{xcolor}
-\usepackage{fontspec}
-\usepackage[T1]{fontenc} % International character encodings
-\usepackage{makeidx}
-\usepackage{lettrine}
-\usepackage{scrlayer-scrpage}
-\usepackage{pifont}
-\usepackage{enumitem}
-\usepackage{caption}
-\usepackage[maxlevel=3,autostyle]{csquotes}
-\usepackage[export]{adjustbox}
-\usepackage{polyglossia}
-\usepackage{afterpage}
-\usepackage{microtype}
-\usepackage{tocbasic}
-\usepackage[pass]{geometry}
-\usepackage{setspace}
-\usepackage{subfiles}
-\usepackage{rotating}
-\usepackage[all,defaultlines=2]{nowidow}
-\usepackage{setspaceenhanced}
-\usepackage{ebgaramond} 
-\usepackage{floatpag}
-\usepackage{pdfpages}
 
-\MakeAutoQuote{»}{«}
-\catcode`\—=13
-%\protected\def—{\allowbreak\textemdash\allowbreak}
-\protected\def—{\textemdash}
-\newcommand\longdash{\mbox{---\,}\ignorespaces{}}
-
-\floatpagestyle{empty}
-\rotfloatpagestyle{empty}
-
-\setmainfont{EB Garamond}
-\setdefaultlanguage[variant=uk]{english}
-\newcommand{\HUGE}{\fontsize{50}{60}\selectfont}
-\newcommand{\moderatelyhuge}{\fontsize{50}{60}\selectfont}
-\newcommand{\reasonablyhuge}{\fontsize{30}{40}\selectfont}
-\newfontfamily\chapterfont{IMFeENsc28P.ttf}
-\newfontfamily\chapterfontlower{IMFeENsc28P.ttf}
-
-
-
-\addtokomafont{disposition}{\normalfont}
-
+\renewfontfamily\chapterfont{IMFeENsc28P.ttf}
+\renewcommand{\thechapter}{\Roman{chapter}} 
 \renewcommand*{\partformat}{\partname~\thepart} %renew so it doesn't have the trailing period
 \renewcommand*{\chapterformat}{\chaptername~\thechapter}
-\newcommand*\hideentrynumber[1]{}
-\makeatletter
-\NewDocumentCommand\ArtPart{som}{%
-  \cleardoubleevenpage
-  \IfBooleanTF{#1}{% star version: no TOC entry or page header
-  }{%
-    \refstepcounter{part}%
-    \IfValueTF{#2}{% optional argument: Use for TOC entry and page header
-      \addparttocentry{\thepart.}{#2}%
-      \partmark{#2}%
-    }{}%
-  }%
-  \noindent\includegraphics[width=\textwidth]{#3}%
-  \par\nobreak
-  \@afterindentfalse% don't indent first paragraph after the heading
-  \@afterheading% don't allow page break here etc.
-  \thispagestyle{plain}
-}
-\NewDocumentCommand\ArtChapter{som}{%
-  \cleardoubleoddpage
-  \IfBooleanTF{#1}{% star version: no TOC entry or page header
-  }{%
-    \refstepcounter{chapter}%
-    \IfValueTF{#2}{% optional argument: Use for TOC entry and page header
-      \addchaptertocentry{\thechapter}{#2}%
-      \chaptermark{#2}%
-    }{}%
-  }%
-  \noindent\includegraphics[width=\textwidth]{#3}%
-%  \par\nobreak
-\vspace{0pt}
-  \@afterindentfalse% don't indent first paragraph after the heading
-  \@afterheading% don't allow page break here etc.
-  \thispagestyle{plain}
-}
 
-\makeatother
 
-\newcount\zzc
-\makeatletter
-\def\zz{%
-\ifnum\prevgraf<\c@L@lines
-\zzc\z@
-\loop
-\ifnum\zzc<\prevgraf
-\advance\zzc\@ne
-\afterassignment\zzda\count@\L@parshape\relax
-\repeat
-\parshape\L@parshape
-\fi}
-\def\zzda{\afterassignment\zzdb\dimen@}
-\def\zzdb{\afterassignment\zzdef\dimen@}
-\def\zzdef#1\relax{\edef\L@parshape{\the\numexpr\count@-1\relax\space #1}}
-\makeatother
-
-%\BeforeTOCHead[toc]{%
-%  \KOMAoptions{parskip=false}% no parskip in ToC
-%  \RedeclareSectionCommand[afterskip=1cm]{chapter}
-%}
 \BeforeTOCHead[tocline]{%
   \KOMAoptions{parskip=false}% no parskip in ToC
 %  \RedeclareSectionCommand[afterskip=0pt]{figure}% no skip after ToC title
@@ -129,37 +25,17 @@ headings=big]{scrbook} % Document font size and paper size
 \DeclareTOCStyleEntry[beforeskip=.3cm,dynnumwidth=true,entryformat=\Large\bfseries]{part}{part}
 \DeclareTOCStyleEntry[beforeskip=.1cm,numwidth=-20pt,entrynumberformat=\hideentrynumber]{tocline}{figure}
 
-%\DeclareTOCStyleEntry[beforeskip=.1cm,entryformat=\chapterfont,dynnumwidth=true,linefill=\TOCLineLeaderFill]{chapter}{chapter}
-%
-%\DeclareTOCStyleEntry[beforeskip=.3cm,dynnumwidth=true,entryformat=\Large\chapterfont\bfseries]{part}{part}
-%\DeclareTOCStyleEntry[beforeskip=.1cm,numwidth=-20pt,entrynumberformat=\hideentrynumber]{tocline}{figure}
-
 \DeclareTOCStyleEntry[beforeskip=.1cm]{tocline}{part}
 \DeclareTOCStyleEntry[beforeskip=.1cm]{default}{subsection}
 
 
-
-\headsep=10pt
-\headheight=45pt
-\footskip=30pt
-
-
-
-%\defaultfontfeatures{Mapping=tex-text}
-\defaultfontfeatures{Ligatures=TeX}
-
-
-
 \automark{chapter}
 \lehead{Treasure Island}
-\rohead{Chapter \thechapter: \leftmark}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \arabic{chapter}:\ #1}{}}
+%we're using Roman numerals in the chapter names themselves and it's a PITA to decode Roman numerals: redefine chaptermark to use Arabic numerals in the header
+\rohead{\leftmark}
 \flushbottom
 
-\setlist[itemize]{noitemsep} 
-
-\captionsetup[figure]{font=sc,labelformat=empty}
-
-\graphicspath{ {./images/} }
 
 
 \hyphenation{Bland-ly}
@@ -167,79 +43,32 @@ headings=big]{scrbook} % Document font size and paper size
 
 \begin{document}
 
-\renewcommand*{\chaptermarkformat}{}
-\renewcommand*{\chapterheadendvskip}{\vspace{0pt}}
-\renewcommand*{\chapterheadstartvskip}{\vspace{0pt}}
 
 \frontmatter
 \pagestyle{empty}
 
-% \recalctypearea
-% \newgeometry{left=15mm,right=15mm,top=15mm,bottom=15mm}
  
  \includepdf[width=1.2\textwidth]{title.png}
  
  \includepdf[addtolist={1,figure,\textbf{Frontispiece},frontispiece},width=1.2\textwidth]{frontispiece.png}
  \includepdf[addtolist={1,figure,\textbf{Map},map},width=\textwidth]{timapcolor.png}
  
-%	 
-%	 \vfill
-%	 \begin{figure}[p!]
-%	\centering
-%	\includegraphics[width=\hsize]{titlepage}
-%	\end{figure}
-%	\vfill
-%	
-%	
-%	\KOMAoptions{headings=openany}
-%	
-%	
-%	\vfill
-%	 \begin{figure}[p!]
-%	\centering
-%	\includegraphics[width=\hsize]{frontispiece}
-%	\caption[\textbf{Frontispiece}]{}
-%	\end{figure}
-%	\vfill
-%	\thispagestyle{empty}
-%	
-%	
-%	
-%	~\vfill
-%	 \begin{figure}[p!]
-%	\centering
-%	\includegraphics[width=\picsize]{timapcolor}
-%	\caption[Map]{}
-%	\end{figure}
-%	~\vfill
-%	\thispagestyle{empty}
 
 
 
 \pagestyle{plain}
 
-\renewcommand*\raggedchapter{\centering}
+
 \KOMAoptions{headings=openleft}
 
-%  \recalctypearea
-%\restoregeometry
-
-%\footskip=20pt
 \renewcommand{\contentsname}{\includegraphics[width=\linewidth]{contents}}
 \tableofcontents
-%\clearpage
-
 
 
 
 \renewcommand{\listfigurename}{\includegraphics[width=\linewidth]{listofillustrations}}
 \listoffigures
 
-%\clearpage
-
-
-
-\footskip=30pt
 
 \KOMAoptions{headings=openany}
 \chapter*{Dedication}
@@ -380,25 +209,30 @@ Where these and their creations lie!\\
 \includegraphics[width=\linewidth]{colophon}
 \end{figure}
 \centering
-\vspace{-0.3cm}
-EB Garamond is Georg Mayr-Duffner's free and open source implementation of Claude Garamond’s famous humanist typefaces from the mid-sixteenth century. github.com/georgd/EB-Garamond
-
-\rule{0.5\textwidth}{.4pt}
-
-Title page, chapter titles, and part titles are set in IM Fell. Dr John Fell, Bishop of Oxford, purchased the original set of types from Holland circa 1670, for use by the University of Oxford. The Fell Types are digitally reproduced by Igino Marini. www.iginomarini.com
-
-
-\rule{0.5\textwidth}{.4pt}
-
+\vfill
+\begin{minipage}{\textwidth}
 \textit{Treasure Island} was originally serialised in the magazine \textit{Young Folks} between 1881 and 1882, credited to the pseudononym »Captain George North«. In 1883, Cassell and Company published it in London (UK) as a standalone work, now credited to Robert Louis Stevenson (1850\textendash1894) under his own name. Illustrations by Louis Rhead (1857\textendash1926) are from the 1915 edition, published by Harper Brothers in New York City (USA). Grateful acknowledgement is made to the Internet Archive, which in 2007 digitised a copy of this edition belonging to the New York Public Library.
-
+\end{minipage}
+\vfill
+gutenberg.org/ebooks/120
+\vfill
 \rule{0.5\textwidth}{.4pt}
-
-
-This typeset is dedicated to the public domain under a Creative Commons CC0 1.0 Universal deed: creativecommons.org/publicdomain/zero/1.0/\\
-
+\vfill
+\begin{minipage}{\textwidth}
+Text is set in »EB Garamond«, Georg Mayr-Duffner's free and open source implementation of Claude Garamond’s famous humanist typefaces from the mid-sixteenth century. Title page, chapter titles, and part titles are set in »IM Fell«. Dr John Fell, Bishop of Oxford, purchased the original set of types from Holland circa 1670, for use by the University of Oxford. The Fell Types are digitally reproduced by Igino Marini. 
+\end{minipage}
+\vfill
+github.com/georgd/EB-Garamond\\
+www.iginomarini.com
+\vfill
 \rule{0.5\textwidth}{.4pt}
-
+\vfill
+\begin{minipage}{\textwidth}
+This typeset is dedicated to the public domain under a Creative Commons CC0 1.0 Universal deed: creativecommons.org/publicdomain/zero/1.0/
+\end{minipage}
+\vfill
+\rule{0.5\textwidth}{.4pt}
+\vfill
 Typeset in \LaTeX{}. Last revised \today.
 \enlargethispage{2\baselineskip}
 \thispagestyle{empty}
