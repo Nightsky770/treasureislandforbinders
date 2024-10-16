@@ -37,6 +37,14 @@ a5paper,
 \flushbottom
 
 
+\begin{letter}
+	\def\picsize{1.1}
+\end{letter}
+
+\begin{a4}
+	\def\picsize{1.0}
+\end{a4}
+	
 
 \hyphenation{Bland-ly}
 
@@ -61,12 +69,12 @@ a5paper,
 
 \KOMAoptions{headings=openleft}
 
-\renewcommand{\contentsname}{\includegraphics[width=\linewidth]{contents}}
+\imagetoc{contents}
+\imagelof{listofillustrations}{List of Illustrations}
 \tableofcontents
 
+\cleardoubleevenpage
 
-
-\renewcommand{\listfigurename}{\includegraphics[width=\linewidth]{listofillustrations}}
 \listoffigures
 
 
