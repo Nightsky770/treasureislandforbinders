@@ -9,9 +9,5 @@ If you are using US letter paper (8.5" x 11"), download the "letter" folder cont
 
 If you are using A4, download the "a4" folder containing the signatures and print them out, double-sided, flip on short side.
 
-TeX originals are in the source folder.
+Source files (top-level and per-chapter files) are in the source directory for each book. You do not need them unless you are preparing your own version. I am using LuaLaTeX.
 
-Fonts used are:
-
-* EB Garamond: https://www.1001freefonts.com/eb-garamond.font
-* IM Fell English Small Caps: https://www.1001freefonts.com/im-fell-english-sc.font
