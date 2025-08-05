@@ -1,50 +1,44 @@
 \documentclass[
-%paper=5.5in:8.5in,
-a5paper,
+paper=5.5in:8.5in,
+%a5paper,
 ]{scrbook} % Document font size and paper size
-\usepackage{bindery}
+
+\title{Treasure Island}
+
+
+\usepackage[namedChapters]{bindery}
 \usepackage{dropcaps}
 \usepackage{artheadings}
 \usepackage{illustrations}
-\usepackage{verse}
+
+% dropcap setup: custom defaults for this work
+\setcounter{DefaultLines}{5}
+\setlength{\DefaultFindent}{2pt}
+\LettrineImagetrue
 
 \renewfontfamily\chapterfont{IMFeENsc28P.ttf}
-\renewcommand{\thechapter}{\Roman{chapter}} 
-\renewcommand*{\partformat}{\partname~\thepart} %renew so it doesn't have the trailing period
-\renewcommand*{\chapterformat}{\chaptername~\thechapter}
-
 
 \BeforeTOCHead[tocline]{%
   \KOMAoptions{parskip=false}% no parskip in ToC
-%  \RedeclareSectionCommand[afterskip=0pt]{figure}% no skip after ToC title
+  \RedeclareSectionCommand[afterskip=0pt]{figure}% no skip after ToC title
   \RedeclareSectionCommand[tocbeforeskip=1sp minus 1sp]{figure} %scootch entries together
 }
 
-\DeclareTOCStyleEntry[beforeskip=.1cm,dynnumwidth=true,linefill=\TOCLineLeaderFill]{chapter}{chapter}
+\BeforeTOCHead[toc]{%
+  \KOMAoptions{parskip=false}% no parskip in ToC
+  \RedeclareSectionCommand[afterskip=0pt]{chapter}% no skip after ToC title
+}
+
+\DeclareTOCStyleEntry[beforeskip=.1cm,linefill=\TOCLineLeaderFill]{chapter}{chapter}
 
 \DeclareTOCStyleEntry[beforeskip=.3cm,dynnumwidth=true,entryformat=\Large\bfseries]{part}{part}
-\DeclareTOCStyleEntry[beforeskip=.1cm,numwidth=-20pt,entrynumberformat=\hideentrynumber]{tocline}{figure}
+\DeclareTOCStyleEntry[beforeskip=.1cm,entrynumberformat=\hideentrynumber]{tocline}{figure}
 
 \DeclareTOCStyleEntry[beforeskip=.1cm]{tocline}{part}
 \DeclareTOCStyleEntry[beforeskip=.1cm]{default}{subsection}
 
 
-\automark{chapter}
-\lehead{Treasure Island}
-\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \arabic{chapter}:\ #1}{}}
-%we're using Roman numerals in the chapter names themselves and it's a PITA to decode Roman numerals: redefine chaptermark to use Arabic numerals in the header
-\rohead{\leftmark}
-\flushbottom
 
-
-\begin{letter}
-	\def\picsize{1.1}
-\end{letter}
-
-\begin{a4}
-	\def\picsize{1.0}
-\end{a4}
-	
 
 \hyphenation{Bland-ly}
 
@@ -56,10 +50,10 @@ a5paper,
 \pagestyle{empty}
 
  
- \includepdf[width=1.2\textwidth]{title.png}
+ \includepdf[width=\basicwidth]{title.jpg}
  
- \includepdf[addtolist={1,figure,\textbf{Frontispiece},frontispiece},width=1.2\textwidth]{frontispiece.png}
- \includepdf[addtolist={1,figure,\textbf{Map},map},width=\textwidth]{timapcolor.png}
+ \includepdf[addtolist={1,figure,\textbf{Frontispiece},frontispiece},width=\basicwidth]{frontispiece.jpg}
+ \includepdf[addtolist={1,figure,Map,map},width=\basicwidth]{map.jpg}
  
 
 
@@ -69,14 +63,19 @@ a5paper,
 
 \KOMAoptions{headings=openleft}
 
-\imagetoc{contents}
-\imagelof{listofillustrations}{List of Illustrations}
+\let\originalheadstartvskip=\chapterheadstartvskip
+\renewcommand*{\chapterheadstartvskip}{\vspace*{-0em}} 
+\imagetoc{contents}{1.0}
 \tableofcontents
+
+
+\imagelof{listofillustrations}{List of Illustrations}{1.0}
+
+\let\chapterheadstartvskip=\originalheadstartvskip
 
 \cleardoubleevenpage
 
 \listoffigures
-
 
 \KOMAoptions{headings=openany}
 \chapter*{Dedication}
@@ -96,8 +95,22 @@ dedicated\\
 the author.
 \end{flushright}
 \end{center}
+\thispagestyle{empty}
 \clearpage
 
+
+
+
+
+
+
+
+{
+\renewcommand{\cleardoublepage}{\newpage}
+\mainmatter
+}
+\pagestyle{headings}
+\renewcommand*{\chapterpagestyle}{plain}
 
 \chapter*{To The Hesitating Purchaser}
 \vfill
@@ -123,17 +136,8 @@ Where these and their creations lie!\\
 \end{altverse}
 \end{verse}
 \vfill
-
-
-
-
-
-{
-\renewcommand{\cleardoublepage}{\newpage}
-\mainmatter
-}
-\pagestyle{headings}
-\renewcommand*{\chapterpagestyle}{plain}
+\thispagestyle{empty}
+\clearpage
 
 \ArtPart[The Old Buccaneer]{part1head}
 
@@ -217,21 +221,22 @@ Where these and their creations lie!\\
 \includegraphics[width=\linewidth]{colophon}
 \end{figure}
 \centering
-\vfill
+\vspace*{-5em}
 \begin{minipage}{\textwidth}
-\textit{Treasure Island} was originally serialised in the magazine \textit{Young Folks} between 1881 and 1882, credited to the pseudononym »Captain George North«. In 1883, Cassell and Company published it in London (UK) as a standalone work, now credited to Robert Louis Stevenson (1850\textendash1894) under his own name. Illustrations by Louis Rhead (1857\textendash1926) are from the 1915 edition, published by Harper Brothers in New York City (USA). Grateful acknowledgement is made to the Internet Archive, which in 2007 digitised a copy of this edition belonging to the New York Public Library.
+\textit{Treasure Island} was originally serialised in the magazine \textit{Young Folks} between 1881 and 1882, credited to <Captain George North>. In 1883, Cassell and Company published it in London (UK) as a standalone work, now credited to Robert Louis Stevenson (1850\textendash1894) under his own name.
+
+ Illustrations by Louis Rhead (1857\textendash1926) are from the 1915 edition, published by Harper Brothers in New York City (USA). Grateful acknowledgement is made to the Internet Archive, which in 2007 digitised a copy of this edition belonging to the New York Public Library.
+\centerline{gutenberg.org/ebooks/120}
 \end{minipage}
-\vfill
-gutenberg.org/ebooks/120
 \vfill
 \rule{0.5\textwidth}{.4pt}
 \vfill
 \begin{minipage}{\textwidth}
-Text is set in »EB Garamond«, Georg Mayr-Duffner's free and open source implementation of Claude Garamond’s famous humanist typefaces from the mid-sixteenth century. Title page, chapter titles, and part titles are set in »IM Fell«. Dr John Fell, Bishop of Oxford, purchased the original set of types from Holland circa 1670, for use by the University of Oxford. The Fell Types are digitally reproduced by Igino Marini. 
+Text is set in <EB Garamond>, Georg Mayr-Duffner's free and open source implementation of Claude Garamond’s famous humanist typefaces from the mid-sixteenth century. 
+
+Title page, chapter titles, and part titles are set in <IM Fell>. Dr John Fell, Bishop of Oxford, purchased the original set of types from Holland circa 1670. The Fell Types are digitally reproduced by Igino Marini.
+\centerline{github.com/georgd/EB-Garamond\\www.iginomarini.com}
 \end{minipage}
-\vfill
-github.com/georgd/EB-Garamond\\
-www.iginomarini.com
 \vfill
 \rule{0.5\textwidth}{.4pt}
 \vfill
